@@ -67,14 +67,16 @@ class App extends React.Component {
       confirmLoading: false,
       billAmount: 0,
       billDiscount: 0,
-      store: false,
-      name: ""
+      page: 0,
+      name: "",
+      working: false
     };
     this.billAmountCalc = this.billAmountCalc.bind(this);
     this.discountCalc = this.discountCalc.bind(this);
     this.shoppingStoreChalay = this.shoppingStoreChalay.bind(this);
     this.vapisChalay = this.vapisChalay.bind(this);
     this.onNameChange = this.onNameChange.bind(this);
+    this.working = this.working.bind(this);
   }
   openNotification = () => {
     // notification.open({
@@ -116,7 +118,9 @@ class App extends React.Component {
       this.openNotification();
     }, 2000);
   };
-
+  working() {
+    this.setState({ page: 2 });
+  }
   handleCancel = () => {
     console.log("Clicked cancel button");
     this.setState({
@@ -124,10 +128,10 @@ class App extends React.Component {
     });
   };
   shoppingStoreChalay() {
-    this.setState({ store: true });
+    this.setState({ page: 1 });
   }
   vapisChalay() {
-    this.setState({ store: false });
+    this.setState({ page: 0 });
   }
   handleChange = info => {
     if (info.file.status === "uploading") {
@@ -172,11 +176,11 @@ class App extends React.Component {
     );
     const { imageUrl } = this.state;
     const { visible, confirmLoading, ModalText } = this.state;
-    if (this.state.store === false)
+    if (this.state.page === 0)
       return (
         <Layout
           className="layout"
-          style={{ backgroundColor: "lightgreen", minHeight: "100%" }}
+          style={{ backgroundColor: "lightGreen", minHeight: "100%" }}
         >
           <Header>
             <div className="logo" />
@@ -189,6 +193,9 @@ class App extends React.Component {
               <Menu.Item key="1">Laen Daen Home</Menu.Item>
               <Menu.Item key="2" onClick={this.shoppingStoreChalay}>
                 Shopping Store
+              </Menu.Item>
+              <Menu.Item key="3" onClick={this.working}>
+                How Laen Daen Works
               </Menu.Item>
             </Menu>
           </Header>
@@ -317,7 +324,7 @@ class App extends React.Component {
           </Content>
         </Layout>
       );
-    else
+    else if (this.state.page === 1)
       return (
         <Layout
           className="layout"
@@ -336,6 +343,9 @@ class App extends React.Component {
               </Menu.Item>
               <Menu.Item key="2" onClick={this.shoppingStoreChalay}>
                 Shopping Store
+              </Menu.Item>
+              <Menu.Item key="3" onClick={this.working}>
+                How Laen Daen Works
               </Menu.Item>
             </Menu>
           </Header>
@@ -412,6 +422,7 @@ class App extends React.Component {
           </Content>
         </Layout>
       );
+    else if (this.state.page === 2) return <div>Hello</div>;
   }
 }
 
