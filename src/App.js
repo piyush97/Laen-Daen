@@ -53,12 +53,19 @@ function beforeUpload(file) {
 }
 
 class App extends React.Component {
-  state = {
-    loading: false,
-    ModalText: "",
-    visible: false,
-    confirmLoading: false
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      loading: false,
+      ModalText: "",
+      visible: false,
+      confirmLoading: false,
+      billAmount: 0,
+      billDiscount: 0
+    };
+    this.billAmountCalc = this.billAmountCalc.bind(this);
+  }
+
   showModal = () => {
     this.setState({
       visible: true
@@ -100,7 +107,9 @@ class App extends React.Component {
       );
     }
   };
-
+  billAmountCalc(event) {
+    this.setState({ billAmount: event.target.value });
+  }
   handleSubmit = e => {
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
@@ -181,7 +190,12 @@ class App extends React.Component {
                   </Select>
                 </Col>
                 <Col xs={24} sm={12} md={12} lg={12} xl={12}>
-                  <Input placeholder="₹200" type="number" pattern="[0-9\/]*" />
+                  <Input
+                    placeholder="₹200"
+                    type="number"
+                    pattern="[0-9\/]*"
+                    onChange={this.billAmountCalc}
+                  />
                 </Col>
                 <Col xs={24} sm={24} md={24} lg={24} xl={24}></Col>
 
@@ -231,6 +245,9 @@ class App extends React.Component {
                 confirmLoading={confirmLoading}
                 onCancel={this.handleCancel}
               >
+                <p>Your food order was of ₹ {this.state.billAmount}</p>
+                <p>You get a Coupon of ₹ {this.state.billDiscount}</p>
+                <p>You contribute to</p>
                 <p>{ModalText}</p>
               </Modal>
             </Row>
