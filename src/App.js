@@ -351,27 +351,15 @@ class App extends React.Component {
                     hoverable
                     cover={
                       <img
+                        style={{ height: "241px", width: "362px" }}
                         alt="shoes"
-                        src="https://static-ssl.businessinsider.com/image/5caf6758775bc71f8d2cd3a5-1732/adidas-parley-gear-patrol-lead-full.jpg"
-                      />
-                    }
-                  >
-                    <Meta title="Shoes" description="Recycled Shoes" />
-                  </Card>
-                </Col>
-                <Col xs={24} sm={24} md={8} lg={8} xl={8}>
-                  <Card
-                    hoverable
-                    cover={
-                      <img
-                        alt="example"
-                        src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"
+                        src="https://www.recycleandrecoverplastics.org/wp-content/uploads/2014/12/bottles-into-shirt.jpg"
                       />
                     }
                   >
                     <Meta
-                      title="Europe Street beat"
-                      description="www.instagram.com"
+                      title="Shirt"
+                      description="Shirt made from plastic containers"
                     />
                   </Card>
                 </Col>
@@ -381,13 +369,29 @@ class App extends React.Component {
                     cover={
                       <img
                         alt="example"
-                        src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"
+                        src="https://www.recycleandrecoverplastics.org/wp-content/uploads/2014/12/bottle-cap-into-rake.jpg"
                       />
                     }
                   >
                     <Meta
-                      title="Europe Street beat"
-                      description="www.instagram.com"
+                      title="Brooms made from Bottle Caps"
+                      description="Brooms made from Bottle Caps"
+                    />
+                  </Card>
+                </Col>
+                <Col xs={24} sm={24} md={8} lg={8} xl={8}>
+                  <Card
+                    hoverable
+                    cover={
+                      <img
+                        alt="example"
+                        src="https://www.recycleandrecoverplastics.org/wp-content/uploads/2014/12/bag-into-bench.jpg"
+                      />
+                    }
+                  >
+                    <Meta
+                      title="Portable Benches"
+                      description="Made from the plastic bags"
                     />
                   </Card>
                 </Col>
