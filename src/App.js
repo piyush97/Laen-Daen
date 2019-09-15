@@ -6,6 +6,7 @@ import {
   Typography,
   Select,
   Input,
+  Modal,
   Upload,
   Icon,
   message,
@@ -53,8 +54,37 @@ function beforeUpload(file) {
 
 class App extends React.Component {
   state = {
-    loading: false
+    loading: false,
+    ModalText: "Content of the modal",
+    visible: false,
+    confirmLoading: false
   };
+  showModal = () => {
+    this.setState({
+      visible: true
+    });
+  };
+
+  handleOk = () => {
+    this.setState({
+      ModalText: "The modal will be closed after two seconds",
+      confirmLoading: true
+    });
+    setTimeout(() => {
+      this.setState({
+        visible: false,
+        confirmLoading: false
+      });
+    }, 2000);
+  };
+
+  handleCancel = () => {
+    console.log("Clicked cancel button");
+    this.setState({
+      visible: false
+    });
+  };
+
   handleChange = info => {
     if (info.file.status === "uploading") {
       this.setState({ loading: true });
@@ -94,6 +124,8 @@ class App extends React.Component {
       </div>
     );
     const { imageUrl } = this.state;
+    const { visible, confirmLoading, ModalText } = this.state;
+
     return (
       <Layout className="layout" style={{ backgroundColor: "lightgreen" }}>
         <Header>
@@ -183,11 +215,24 @@ class App extends React.Component {
                   ></Select>
                 </Col>
                 <Col xs={24} sm={24} md={24} lg={24} xl={24}>
-                  <Button style={{ width: "100%" }} type="primary">
+                  <Button
+                    style={{ width: "100%" }}
+                    type="primary"
+                    onClick={this.showModal}
+                  >
                     Submit
                   </Button>
                 </Col>
               </Row>
+              <Modal
+                title="Title"
+                visible={visible}
+                onOk={this.handleOk}
+                confirmLoading={confirmLoading}
+                onCancel={this.handleCancel}
+              >
+                <p>{ModalText}</p>
+              </Modal>
             </Row>
           </div>
         </Content>
