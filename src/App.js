@@ -422,7 +422,52 @@ class App extends React.Component {
           </Content>
         </Layout>
       );
-    else if (this.state.page === 2) return <div>Hello</div>;
+    else if (this.state.page === 2)
+      return (
+        <Layout
+          className="layout"
+          style={{ backgroundColor: "lightgreen", minHeight: "100%" }}
+        >
+          <Header>
+            <div className="logo" />
+            <Menu
+              theme="dark"
+              mode="horizontal"
+              defaultSelectedKeys={["1"]}
+              style={{ lineHeight: "64px" }}
+            >
+              <Menu.Item key="1" onClick={this.vapisChalay}>
+                Laen Daen Home
+              </Menu.Item>
+              <Menu.Item key="2" onClick={this.shoppingStoreChalay}>
+                Shopping Store
+              </Menu.Item>
+              <Menu.Item key="3" onClick={this.working}>
+                How Laen Daen Works
+              </Menu.Item>
+            </Menu>
+          </Header>
+          <center>
+            <Title style={{ padding: "1%" }}>How it Works?</Title>
+          </center>
+          <Content style={{ padding: "2% 10% 30% 10%" }}>
+            <div
+              style={{ background: "#f9f9f9", padding: 24, minHeight: "100%" }}
+            >
+              <Row>
+                <Col xs={24} sm={24} md={24} lg={24} xl={24}>
+                  <center>
+                    <Title level={4}>
+                      A digital platform for Sustainable business, earth and
+                      happy consumers.
+                    </Title>
+                  </center>
+                </Col>
+              </Row>
+            </div>
+          </Content>
+        </Layout>
+      );
   }
 }
 
