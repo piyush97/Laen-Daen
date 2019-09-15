@@ -64,8 +64,12 @@ class App extends React.Component {
       billDiscount: 0
     };
     this.billAmountCalc = this.billAmountCalc.bind(this);
+    this.discountCalc = this.discountCalc.bind(this);
   }
-
+  discountCalc() {
+    var discountAmount = (this.state.billAmount / 100) * 100;
+    this.setState({ billDiscount: discountAmount });
+  }
   showModal = () => {
     this.setState({
       visible: true
@@ -109,6 +113,7 @@ class App extends React.Component {
   };
   billAmountCalc(event) {
     this.setState({ billAmount: event.target.value });
+    this.discountCalc();
   }
   handleSubmit = e => {
     e.preventDefault();
@@ -226,7 +231,14 @@ class App extends React.Component {
                   <Select
                     style={{ width: "100%" }}
                     placeholder="Number of Containers"
-                  ></Select>
+                  >
+                    <Option value="1">1</Option>
+                    <Option value="2">2</Option>
+                    <Option value="3">3</Option>
+                    <Option value="4">4</Option>
+                    <Option value="5">5</Option>
+                    <Option value="5+">5+</Option>
+                  </Select>
                 </Col>
                 <Col xs={24} sm={24} md={24} lg={24} xl={24}>
                   <Button
