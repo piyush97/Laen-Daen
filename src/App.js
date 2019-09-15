@@ -125,13 +125,39 @@ class App extends React.Component {
                 </Col>
 
                 <Col xs={24} sm={12} md={12} lg={12} xl={12}>
+                  <Select
+                    style={{ width: "100%" }}
+                    showSearch
+                    placeholder="Select the Food Delivery App"
+                    optionFilterProp="children"
+                    onChange={onChange}
+                    onFocus={onFocus}
+                    onBlur={onBlur}
+                    onSearch={onSearch}
+                    filterOption={(input, option) =>
+                      option.props.children
+                        .toLowerCase()
+                        .indexOf(input.toLowerCase()) >= 0
+                    }
+                  >
+                    <Option value="Zomato">Zomato</Option>
+                    <Option value="Swiggy">Swiggy</Option>
+                    <Option value="Uber Eats">Uber Eats</Option>
+                    <Option value="Local Vendor">Local Vendor</Option>
+                  </Select>
+                </Col>
+                <Col xs={24} sm={12} md={12} lg={12} xl={12}>
+                  <Input placeholder="₹200" type="number" pattern="[0-9\/]*" />
+                </Col>
+                <Col xs={24} sm={24} md={24} lg={24} xl={24}></Col>
+                <Col xs={24} sm={24} md={24} lg={24} xl={24}>
                   <center>
                     <Typography>Upload your Food Bill</Typography>
                   </center>
                 </Col>
-
-                <Col xs={24} sm={12} md={12} lg={12} xl={12}>
+                <Col xs={24} sm={24} md={24} lg={24} xl={24}>
                   <Upload
+                    style={{ width: "100%" }}
                     name="Bill Upload"
                     listType="picture-card"
                     className="avatar-uploader"
@@ -150,11 +176,11 @@ class App extends React.Component {
                       uploadButton
                     )}
                   </Upload>
-                </Col>
-                <Col xs={24} sm={12} md={12} lg={12} xl={12}></Col>
-                <Col xs={24} sm={12} md={12} lg={12} xl={12}>
-                  {" "}
-                  <Input placeholder="₹200" type="number" pattern="[0-9\/]*" />
+                  <Col xs={24} sm={24} md={24} lg={24} xl={24}>
+                    <Button style={{ width: "100%" }} type="primary">
+                      Submit
+                    </Button>
+                  </Col>
                 </Col>
               </Row>
             </Row>
