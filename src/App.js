@@ -95,20 +95,22 @@ class App extends React.Component {
     );
     const { imageUrl } = this.state;
     return (
-      <Layout className="layout">
+      <Layout className="layout" style={{ backgroundColor: "lightgreen" }}>
         <Header>
           <div className="logo" />
           <Menu
             theme="dark"
             mode="horizontal"
-            defaultSelectedKeys={["2"]}
+            defaultSelectedKeys={["1"]}
             style={{ lineHeight: "64px" }}
           >
             <Menu.Item key="1">Laen Daen Home</Menu.Item>
           </Menu>
         </Header>
         <Content style={{ padding: "0 50px" }}>
-          <div style={{ background: "#fff", padding: 24, minHeight: "90vh" }}>
+          <div
+            style={{ background: "#f9f9f9", padding: 24, minHeight: "90vh" }}
+          >
             <Row>
               <center>
                 {" "}
@@ -150,12 +152,8 @@ class App extends React.Component {
                   <Input placeholder="₹200" type="number" pattern="[0-9\/]*" />
                 </Col>
                 <Col xs={24} sm={24} md={24} lg={24} xl={24}></Col>
-                <Col xs={24} sm={24} md={24} lg={24} xl={24}>
-                  <center>
-                    <Typography>Upload your Food Bill</Typography>
-                  </center>
-                </Col>
-                <Col xs={24} sm={24} md={24} lg={24} xl={24}>
+
+                <Col xs={24} sm={12} md={12} lg={12} xl={12}>
                   <Upload
                     style={{ width: "100%" }}
                     name="Bill Upload"
@@ -176,11 +174,18 @@ class App extends React.Component {
                       uploadButton
                     )}
                   </Upload>
-                  <Col xs={24} sm={24} md={24} lg={24} xl={24}>
-                    <Button style={{ width: "100%" }} type="primary">
-                      Submit
-                    </Button>
-                  </Col>
+                </Col>
+
+                <Col xs={24} sm={12} md={12} lg={12} xl={12}>
+                  <Select
+                    style={{ width: "100%" }}
+                    placeholder="Number of Containers"
+                  ></Select>
+                </Col>
+                <Col xs={24} sm={24} md={24} lg={24} xl={24}>
+                  <Button style={{ width: "100%" }} type="primary">
+                    Submit
+                  </Button>
                 </Col>
               </Row>
             </Row>
