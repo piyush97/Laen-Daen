@@ -141,7 +141,10 @@ class App extends React.Component {
     const { visible, confirmLoading, ModalText } = this.state;
 
     return (
-      <Layout className="layout" style={{ backgroundColor: "lightgreen" }}>
+      <Layout
+        className="layout"
+        style={{ backgroundColor: "lightgreen", minHeight: "100%" }}
+      >
         <Header>
           <div className="logo" />
           <Menu
@@ -151,11 +154,14 @@ class App extends React.Component {
             style={{ lineHeight: "64px" }}
           >
             <Menu.Item key="1">Laen Daen Home</Menu.Item>
+            <Menu.Item key="2" onClick="">
+              Shopping place
+            </Menu.Item>
           </Menu>
         </Header>
-        <Content style={{ padding: "0 50px" }}>
+        <Content style={{ padding: "10% 10% 10% 10%" }}>
           <div
-            style={{ background: "#f9f9f9", padding: 24, minHeight: "90vh" }}
+            style={{ background: "#f9f9f9", padding: 24, minHeight: "100%" }}
           >
             <Row>
               <center>
@@ -259,19 +265,17 @@ class App extends React.Component {
               >
                 <p>Your food order was of ₹ {this.state.billAmount}</p>
                 <p>You get a Coupon of ₹ {this.state.billDiscount}</p>
-                <p>You contribute to</p>
+                <h4>You contribute to</h4>
+                <img
+                  src="https://www.recycleandrecoverplastics.org/wp-content/uploads/2014/12/bottles-into-shirt.jpg"
+                  alt="reward"
+                  width="100%"
+                ></img>
                 <p>{ModalText}</p>
               </Modal>
             </Row>
           </div>
         </Content>
-        <Footer style={{ textAlign: "center" }}>
-          Made with{" "}
-          <span role="img" aria-label="emoji">
-            ❤️
-          </span>{" "}
-          by Team Whatever
-        </Footer>
       </Layout>
     );
   }
