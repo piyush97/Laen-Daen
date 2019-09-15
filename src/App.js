@@ -55,7 +55,7 @@ function beforeUpload(file) {
 class App extends React.Component {
   state = {
     loading: false,
-    ModalText: "Content of the modal",
+    ModalText: "",
     visible: false,
     confirmLoading: false
   };
@@ -67,7 +67,7 @@ class App extends React.Component {
 
   handleOk = () => {
     this.setState({
-      ModalText: "The modal will be closed after two seconds",
+      ModalText: "Thank You for your contribution",
       confirmLoading: true
     });
     setTimeout(() => {
@@ -225,7 +225,7 @@ class App extends React.Component {
                 </Col>
               </Row>
               <Modal
-                title="Title"
+                title="Order Details"
                 visible={visible}
                 onOk={this.handleOk}
                 confirmLoading={confirmLoading}
