@@ -306,7 +306,7 @@ class App extends React.Component {
                     <h2>You contribute to</h2>
                   </center>
                   <img
-                    src="https://d2m1kqghccc19k.cloudfront.net/wp-content/uploads/2019/06/05225604/iStock-671571240-800x600.jpg"
+                    src="https://i.ibb.co/BKGsVCX/new.jpg"
                     alt="reward"
                     width="100%"
                   ></img>
@@ -352,8 +352,7 @@ class App extends React.Component {
                     hoverable
                     cover={
                       <img
-                        style={{ height: "241px", width: "362px" }}
-                        alt="shoes"
+                        alt="shirt"
                         src="https://www.recycleandrecoverplastics.org/wp-content/uploads/2014/12/bottles-into-shirt.jpg"
                       />
                     }
