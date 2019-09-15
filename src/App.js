@@ -457,10 +457,39 @@ class App extends React.Component {
               <Row>
                 <Col xs={24} sm={24} md={24} lg={24} xl={24}>
                   <center>
-                    <Title level={4}>
+                    <Title level={1}>
                       A digital platform for Sustainable business, earth and
                       happy consumers.
                     </Title>
+                  </center>
+                </Col>
+                <Col>
+                  <img
+                    src="https://good360.org/wp-content/uploads/2017/05/shutterstock_265588874-1.png"
+                    height="auto"
+                    width="100%"
+                    alt="benefitted people"
+                  />
+                </Col>
+                <hr style={{ margin: "10px" }} />
+
+                <Col xs={24} sm={24} md={24} lg={24} xl={24}>
+                  <center>
+                    <Title level={1}>
+                      Sectors being benefitting from this App
+                    </Title>
+                  </center>
+                </Col>
+                <hr style={{ margin: "10px" }} />
+                <Col xs={24} sm={24} md={24} lg={24} xl={24}>
+                  <center>
+                    <Title level={1}>Capital Flow</Title>
+                    <img
+                      src="https://i.ibb.co/1Mkw6qQ/flow.png"
+                      height="auto"
+                      width="80%"
+                      alt="flow"
+                    />
                   </center>
                 </Col>
               </Row>
