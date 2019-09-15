@@ -12,8 +12,10 @@ import {
   Icon,
   message,
   Button,
-  Col
+  Col,
+  Card
 } from "antd";
+const { Meta } = Card;
 
 const { Header, Content } = Layout;
 const { Title } = Typography;
@@ -55,21 +57,6 @@ function beforeUpload(file) {
 
 const key = "updatable";
 
-const openNotification = () => {
-  // notification.open({
-  //   key,
-  //   message: "Notification Title",
-  //   description: "description."
-  // });
-  setTimeout(() => {
-    notification.open({
-      key,
-      message: "Check Out the Shopping Store",
-      description: <Button>Open Up</Button>
-    });
-  }, 1000);
-};
-
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -79,10 +66,32 @@ class App extends React.Component {
       visible: false,
       confirmLoading: false,
       billAmount: 0,
-      billDiscount: 0
+      billDiscount: 0,
+      store: false,
+      name: ""
     };
     this.billAmountCalc = this.billAmountCalc.bind(this);
     this.discountCalc = this.discountCalc.bind(this);
+    this.shoppingStoreChalay = this.shoppingStoreChalay.bind(this);
+    this.vapisChalay = this.vapisChalay.bind(this);
+    this.onNameChange = this.onNameChange.bind(this);
+  }
+  openNotification = () => {
+    // notification.open({
+    //   key,
+    //   message: "Notification Title",
+    //   description: "description."
+    // });
+    setTimeout(() => {
+      notification.open({
+        key,
+        message: "Check Out the Shopping Store",
+        description: <Button onClick={this.shoppingStoreChalay}>Open Up</Button>
+      });
+    }, 1000);
+  };
+  onNameChange(event) {
+    this.setState({ name: event.target.value });
   }
   discountCalc() {
     var discountAmount = (this.state.billAmount / 100) * 100;
@@ -104,7 +113,7 @@ class App extends React.Component {
         visible: false,
         confirmLoading: false
       });
-      openNotification();
+      this.openNotification();
     }, 2000);
   };
 
@@ -114,7 +123,12 @@ class App extends React.Component {
       visible: false
     });
   };
-
+  shoppingStoreChalay() {
+    this.setState({ store: true });
+  }
+  vapisChalay() {
+    this.setState({ store: false });
+  }
   handleChange = info => {
     if (info.file.status === "uploading") {
       this.setState({ loading: true });
@@ -158,145 +172,230 @@ class App extends React.Component {
     );
     const { imageUrl } = this.state;
     const { visible, confirmLoading, ModalText } = this.state;
+    if (this.state.store === false)
+      return (
+        <Layout
+          className="layout"
+          style={{ backgroundColor: "lightgreen", minHeight: "100%" }}
+        >
+          <Header>
+            <div className="logo" />
+            <Menu
+              theme="dark"
+              mode="horizontal"
+              defaultSelectedKeys={["1"]}
+              style={{ lineHeight: "64px" }}
+            >
+              <Menu.Item key="1">Laen Daen Home</Menu.Item>
+              <Menu.Item key="2" onClick={this.shoppingStoreChalay}>
+                Shopping Store
+              </Menu.Item>
+            </Menu>
+          </Header>
+          <center>
+            {" "}
+            <Title>Laen Daen</Title>
+            <p>
+              A barter system app for recycling plastic food containers for Food
+              Coupons
+            </p>
+          </center>
+          <Content style={{ padding: "2% 10% 30% 10%" }}>
+            <div
+              style={{ background: "#f9f9f9", padding: 24, minHeight: "100%" }}
+            >
+              <Row>
+                <Row style={{ width: "100%" }}>
+                  <Col xs={24} sm={12} md={12} lg={12} xl={12}>
+                    {" "}
+                    <Input placeholder="Name" onChange={this.onNameChange} />
+                  </Col>
+                  <Col xs={24} sm={12} md={12} lg={12} xl={12}>
+                    {" "}
+                    <Input placeholder="Address" />
+                  </Col>
 
-    return (
-      <Layout
-        className="layout"
-        style={{ backgroundColor: "lightgreen", minHeight: "100%" }}
-      >
-        <Header>
-          <div className="logo" />
-          <Menu
-            theme="dark"
-            mode="horizontal"
-            defaultSelectedKeys={["1"]}
-            style={{ lineHeight: "64px" }}
-          >
-            <Menu.Item key="1">Laen Daen Home</Menu.Item>
-            <Menu.Item key="2" onClick="">
-              Shopping place
-            </Menu.Item>
-          </Menu>
-        </Header>
-        <center>
-          {" "}
-          <Title>Laen Daen</Title>
-        </center>
-        <Content style={{ padding: "2% 10% 30% 10%" }}>
-          <div
-            style={{ background: "#f9f9f9", padding: 24, minHeight: "100%" }}
-          >
-            <Row>
-              <Row style={{ width: "100%" }}>
-                <Col xs={24} sm={12} md={12} lg={12} xl={12}>
-                  {" "}
-                  <Input placeholder="Name" />
-                </Col>
-                <Col xs={24} sm={12} md={12} lg={12} xl={12}>
-                  {" "}
-                  <Input placeholder="Address" />
-                </Col>
+                  <Col xs={24} sm={12} md={12} lg={12} xl={12}>
+                    <Select
+                      style={{ width: "100%" }}
+                      showSearch
+                      placeholder="Select the Food Delivery App"
+                      optionFilterProp="children"
+                      onChange={onChange}
+                      onFocus={onFocus}
+                      onBlur={onBlur}
+                      onSearch={onSearch}
+                      filterOption={(input, option) =>
+                        option.props.children
+                          .toLowerCase()
+                          .indexOf(input.toLowerCase()) >= 0
+                      }
+                    >
+                      <Option value="Zomato">Zomato</Option>
+                      <Option value="Swiggy">Swiggy</Option>
+                      <Option value="Uber Eats">Uber Eats</Option>
+                      <Option value="Local Vendor">Local Vendor</Option>
+                    </Select>
+                  </Col>
+                  <Col xs={24} sm={12} md={12} lg={12} xl={12}>
+                    <Input
+                      placeholder="₹200"
+                      type="number"
+                      pattern="[0-9\/]*"
+                      onChange={this.billAmountCalc}
+                    />
+                  </Col>
+                  <Col xs={24} sm={24} md={24} lg={24} xl={24}></Col>
 
-                <Col xs={24} sm={12} md={12} lg={12} xl={12}>
-                  <Select
-                    style={{ width: "100%" }}
-                    showSearch
-                    placeholder="Select the Food Delivery App"
-                    optionFilterProp="children"
-                    onChange={onChange}
-                    onFocus={onFocus}
-                    onBlur={onBlur}
-                    onSearch={onSearch}
-                    filterOption={(input, option) =>
-                      option.props.children
-                        .toLowerCase()
-                        .indexOf(input.toLowerCase()) >= 0
+                  <Col xs={24} sm={12} md={12} lg={12} xl={12}>
+                    <Upload
+                      style={{ width: "100%" }}
+                      name="Bill Upload"
+                      listType="picture-card"
+                      className="avatar-uploader"
+                      showUploadList={false}
+                      action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                      beforeUpload={beforeUpload}
+                      onChange={this.handleChange}
+                    >
+                      {imageUrl ? (
+                        <img
+                          src={imageUrl}
+                          alt="Bill"
+                          style={{ width: "100%" }}
+                        />
+                      ) : (
+                        uploadButton
+                      )}
+                    </Upload>
+                  </Col>
+
+                  <Col xs={24} sm={12} md={12} lg={12} xl={12}>
+                    <Select
+                      style={{ width: "100%" }}
+                      placeholder="Number of Containers"
+                    >
+                      <Option value="1">1</Option>
+                      <Option value="2">2</Option>
+                      <Option value="3">3</Option>
+                      <Option value="4">4</Option>
+                      <Option value="5">5</Option>
+                      <Option value="5+">5+</Option>
+                    </Select>
+                  </Col>
+                  <Col xs={24} sm={24} md={24} lg={24} xl={24}>
+                    <Button
+                      style={{ width: "100%" }}
+                      type="primary"
+                      onClick={this.showModal}
+                    >
+                      Submit
+                    </Button>
+                  </Col>
+                </Row>
+                <Modal
+                  title={<h3>{this.state.name}'s order details</h3>}
+                  visible={visible}
+                  onOk={this.handleOk}
+                  confirmLoading={confirmLoading}
+                  onCancel={this.handleCancel}
+                >
+                  <p>Your food order was of ₹ {this.state.billAmount}</p>
+                  <p>You get a Coupon of ₹ {this.state.billDiscount}</p>
+                  <h4>You contribute to</h4>
+                  <img
+                    src="https://www.recycleandrecoverplastics.org/wp-content/uploads/2014/12/bottles-into-shirt.jpg"
+                    alt="reward"
+                    width="100%"
+                  ></img>
+                  <p>{ModalText}</p>
+                </Modal>
+              </Row>
+            </div>
+          </Content>
+        </Layout>
+      );
+    else
+      return (
+        <Layout
+          className="layout"
+          style={{ backgroundColor: "lightgreen", minHeight: "100%" }}
+        >
+          <Header>
+            <div className="logo" />
+            <Menu
+              theme="dark"
+              mode="horizontal"
+              defaultSelectedKeys={["1"]}
+              style={{ lineHeight: "64px" }}
+            >
+              <Menu.Item key="1" onClick={this.vapisChalay}>
+                Laen Daen Home
+              </Menu.Item>
+              <Menu.Item key="2" onClick={this.shoppingStoreChalay}>
+                Shopping Store
+              </Menu.Item>
+            </Menu>
+          </Header>
+          <center>
+            {" "}
+            <Title>Laen Daen</Title>
+          </center>
+          <Content style={{ padding: "2% 10% 30% 10%" }}>
+            <div
+              style={{ background: "#f9f9f9", padding: 24, minHeight: "100%" }}
+            >
+              <Row>
+                <Col xs={24} sm={24} md={8} lg={8} xl={8}>
+                  <Card
+                    hoverable
+                    cover={
+                      <img
+                        alt="shoes"
+                        src="https://static-ssl.businessinsider.com/image/5caf6758775bc71f8d2cd3a5-1732/adidas-parley-gear-patrol-lead-full.jpg"
+                      />
                     }
                   >
-                    <Option value="Zomato">Zomato</Option>
-                    <Option value="Swiggy">Swiggy</Option>
-                    <Option value="Uber Eats">Uber Eats</Option>
-                    <Option value="Local Vendor">Local Vendor</Option>
-                  </Select>
+                    <Meta title="Shoes" description="Recycled Shoes" />
+                  </Card>
                 </Col>
-                <Col xs={24} sm={12} md={12} lg={12} xl={12}>
-                  <Input
-                    placeholder="₹200"
-                    type="number"
-                    pattern="[0-9\/]*"
-                    onChange={this.billAmountCalc}
-                  />
-                </Col>
-                <Col xs={24} sm={24} md={24} lg={24} xl={24}></Col>
-
-                <Col xs={24} sm={12} md={12} lg={12} xl={12}>
-                  <Upload
-                    style={{ width: "100%" }}
-                    name="Bill Upload"
-                    listType="picture-card"
-                    className="avatar-uploader"
-                    showUploadList={false}
-                    action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                    beforeUpload={beforeUpload}
-                    onChange={this.handleChange}
-                  >
-                    {imageUrl ? (
+                <Col xs={24} sm={24} md={8} lg={8} xl={8}>
+                  <Card
+                    hoverable
+                    cover={
                       <img
-                        src={imageUrl}
-                        alt="Bill"
-                        style={{ width: "100%" }}
+                        alt="example"
+                        src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"
                       />
-                    ) : (
-                      uploadButton
-                    )}
-                  </Upload>
-                </Col>
-
-                <Col xs={24} sm={12} md={12} lg={12} xl={12}>
-                  <Select
-                    style={{ width: "100%" }}
-                    placeholder="Number of Containers"
+                    }
                   >
-                    <Option value="1">1</Option>
-                    <Option value="2">2</Option>
-                    <Option value="3">3</Option>
-                    <Option value="4">4</Option>
-                    <Option value="5">5</Option>
-                    <Option value="5+">5+</Option>
-                  </Select>
+                    <Meta
+                      title="Europe Street beat"
+                      description="www.instagram.com"
+                    />
+                  </Card>
                 </Col>
-                <Col xs={24} sm={24} md={24} lg={24} xl={24}>
-                  <Button
-                    style={{ width: "100%" }}
-                    type="primary"
-                    onClick={this.showModal}
+                <Col xs={24} sm={24} md={8} lg={8} xl={8}>
+                  <Card
+                    hoverable
+                    cover={
+                      <img
+                        alt="example"
+                        src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"
+                      />
+                    }
                   >
-                    Submit
-                  </Button>
+                    <Meta
+                      title="Europe Street beat"
+                      description="www.instagram.com"
+                    />
+                  </Card>
                 </Col>
               </Row>
-              <Modal
-                title="Order Details"
-                visible={visible}
-                onOk={this.handleOk}
-                confirmLoading={confirmLoading}
-                onCancel={this.handleCancel}
-              >
-                <p>Your food order was of ₹ {this.state.billAmount}</p>
-                <p>You get a Coupon of ₹ {this.state.billDiscount}</p>
-                <h4>You contribute to</h4>
-                <img
-                  src="https://www.recycleandrecoverplastics.org/wp-content/uploads/2014/12/bottles-into-shirt.jpg"
-                  alt="reward"
-                  width="100%"
-                ></img>
-                <p>{ModalText}</p>
-              </Modal>
-            </Row>
-          </div>
-        </Content>
-      </Layout>
-    );
+            </div>
+          </Content>
+        </Layout>
+      );
   }
 }
 
