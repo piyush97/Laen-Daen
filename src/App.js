@@ -3,6 +3,7 @@ import {
   Layout,
   Menu,
   Row,
+  notification,
   Typography,
   Select,
   Input,
@@ -14,7 +15,7 @@ import {
   Col
 } from "antd";
 
-const { Header, Content, Footer } = Layout;
+const { Header, Content } = Layout;
 const { Title } = Typography;
 const { Option } = Select;
 
@@ -52,6 +53,23 @@ function beforeUpload(file) {
   return isJpgOrPng && isLt2M;
 }
 
+const key = "updatable";
+
+const openNotification = () => {
+  // notification.open({
+  //   key,
+  //   message: "Notification Title",
+  //   description: "description."
+  // });
+  setTimeout(() => {
+    notification.open({
+      key,
+      message: "Check Out the Shopping Store",
+      description: <Button>Open Up</Button>
+    });
+  }, 1000);
+};
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -86,6 +104,7 @@ class App extends React.Component {
         visible: false,
         confirmLoading: false
       });
+      openNotification();
     }, 2000);
   };
 
@@ -159,15 +178,15 @@ class App extends React.Component {
             </Menu.Item>
           </Menu>
         </Header>
-        <Content style={{ padding: "10% 10% 10% 10%" }}>
+        <center>
+          {" "}
+          <Title>Laen Daen</Title>
+        </center>
+        <Content style={{ padding: "2% 10% 30% 10%" }}>
           <div
             style={{ background: "#f9f9f9", padding: 24, minHeight: "100%" }}
           >
             <Row>
-              <center>
-                {" "}
-                <Title>Laen Daen</Title>
-              </center>
               <Row style={{ width: "100%" }}>
                 <Col xs={24} sm={12} md={12} lg={12} xl={12}>
                   {" "}
